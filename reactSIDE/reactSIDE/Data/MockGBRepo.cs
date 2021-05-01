@@ -10,6 +10,11 @@ namespace reactSIDE.Data
             throw new System.NotImplementedException();
         }
 
+        public void CreateSiteUser(SiteUser ptc)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Product> getAllProducts()
         {
            var products = new List<Product>
@@ -21,9 +26,19 @@ namespace reactSIDE.Data
            return products;
         }
 
+        public IEnumerable<SiteUser> getAllSiteUser()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Product GetProductById(int id)
         {
             return new Product {Id=0,Title="NICE",Author="Me",Genre="r&b"};
+        }
+
+        public SiteUser GetSiteUserById(int id)
+        {
+            throw new System.NotImplementedException();
         }
 
         public bool SaveChanges()

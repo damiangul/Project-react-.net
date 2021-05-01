@@ -34,6 +34,31 @@ namespace reactSIDE.Data
             return _context.Products.FirstOrDefault(p => p.Id == id);
         }
 
+        public void CreateSiteUser(SiteUser ptc)
+        {
+            if (ptc == null)
+            {
+                throw new ArgumentNullException(nameof(ptc));
+            }
+
+            _context.SiteUsers.Add(ptc);
+        }
+
+        public IEnumerable<SiteUser> getAllSiteUser()
+        {
+            return _context.SiteUsers.ToList();
+        }
+
+        public SiteUser GetSiteUserById(int id)
+        {
+            return _context.SiteUsers.FirstOrDefault(p => p.Id == id);
+        }
+
+
+
+
+
+
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >=0);
