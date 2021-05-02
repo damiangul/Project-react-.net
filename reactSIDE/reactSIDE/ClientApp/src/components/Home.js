@@ -5,7 +5,7 @@ import Footer from "./Footer";
 export default function Home() {
   return (
     <>
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center bg-gray-100">
         <div className="h-imageTheWeeknd relative">
           <h2 className="absolute top-4 left-1/2 transform -translate-x-1/2 text-white font-mono text-6xl text-center">
             Order now

@@ -6,6 +6,7 @@ import Shop from "./components/Shop";
 import Dropdown from "./components/Dropdown";
 
 import "./custom.css";
+import AboutUs from "./components/AboutUs";
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +36,7 @@ export default function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/shop" component={Shop} />
+        <Route path="/aboutus" component={AboutUs} />
       </Switch>
     </Router>
   );
