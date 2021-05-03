@@ -51,7 +51,7 @@ export default function Home() {
         </div>
         <Link
           to={"/shop"}
-          className="m-12 py-6 px-10 bg-yellow-500 rounded-full text-3xl hover: bg-yellow-300 transition duration-300 ease-in-out flex items-center animate-bounce"
+          className="m-12 py-6 px-10 bg-yellow-300 hover:bg-yellow-500 rounded-full text-3xl transition duration-300 ease-in-out flex items-center animate-bounce"
         >
           Buy now!
           <svg
