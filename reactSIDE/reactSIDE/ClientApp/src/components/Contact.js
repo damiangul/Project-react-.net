@@ -24,7 +24,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex flex-col justify-between items-center h-imageTheWeeknd">
+    <div className="flex flex-col justify-between items-center h-imageTheWeeknd bg-gray-100">
       <div className="mt-20">
         <h2 className="font-mono text-lg text-center lg:text-4xl">
           Have questions? Ask us via email.
