@@ -1,6 +1,62 @@
 import React from "react";
+import { useSpring, animated, config } from "react-spring";
 
 export default function AboutUs() {
+  const pStyle = useSpring({
+    from: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
+    },
+    delay: 400,
+    config: config.molasses,
+  });
+
+  const firstLiStyle = useSpring({
+    from: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
+    },
+    delay: 800,
+    config: config.molasses,
+  });
+
+  const secondLiStyle = useSpring({
+    from: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
+    },
+    delay: 1200,
+    config: config.molasses,
+  });
+
+  const thirdLiStyle = useSpring({
+    from: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
+    },
+    delay: 1600,
+    config: config.molasses,
+  });
+
+  const secondPStyle = useSpring({
+    from: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
+    },
+    delay: 2000,
+    config: config.molasses,
+  });
+
   return (
     <div class="h-imageTheWeeknd bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div class="relative py-3 sm:max-w-7xl sm:mx-auto">
@@ -9,12 +65,12 @@ export default function AboutUs() {
           <div class="max-w-md mx-auto">
             <div class="divide-y divide-gray-200">
               <div class="py-8 text-base leading-6 space-y-8 text-gray-700 sm:text-lg sm:leading-7">
-                <p>
+                <animated.p style={pStyle}>
                   We are <strong>number one</strong> CD shop in Europe! Our goal
                   is to provide everyone with a dream album.
-                </p>
+                </animated.p>
                 <ul class="list-disc space-y-2">
-                  <li class="flex items-start">
+                  <animated.li style={firstLiStyle} class="flex items-start">
                     <span class="h-6 flex items-center sm:h-7">
                       <svg
                         class="flex-shrink-0 h-5 w-5 text-cyan-500"
@@ -31,8 +87,8 @@ export default function AboutUs() {
                     <p class="ml-2">
                       Over <strong>72444</strong> thousands of CDs sold!
                     </p>
-                  </li>
-                  <li class="flex items-start">
+                  </animated.li>
+                  <animated.li style={secondLiStyle} class="flex items-start">
                     <span class="h-6 flex items-center sm:h-7">
                       <svg
                         class="flex-shrink-0 h-5 w-5 text-cyan-500"
@@ -50,8 +106,8 @@ export default function AboutUs() {
                       We are providing music from over <strong>1000</strong>{" "}
                       artists!
                     </p>
-                  </li>
-                  <li class="flex items-start">
+                  </animated.li>
+                  <animated.li style={thirdLiStyle} class="flex items-start">
                     <span class="h-6 flex items-center sm:h-7">
                       <svg
                         class="flex-shrink-0 h-5 w-5 text-cyan-500"
@@ -68,11 +124,11 @@ export default function AboutUs() {
                     <p class="ml-2">
                       <strong>10</strong> years on the market!
                     </p>
-                  </li>
+                  </animated.li>
                 </ul>
-                <p className="text-center p-4">
+                <animated.p style={secondPStyle} className="text-center p-4">
                   Find us on facebook, instagram and github!
-                </p>
+                </animated.p>
               </div>
             </div>
           </div>
