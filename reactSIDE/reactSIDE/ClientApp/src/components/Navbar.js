@@ -33,14 +33,17 @@ const Navbar = ({ toggle }) => {
         <Link to={"/shop"} className="p-4">
           Shop
         </Link>
-        <Link to={"/cart"} className="p-4">
-          Cart
-        </Link>
         <Link to={"/aboutus"} className="p-4">
           About us
         </Link>
         <Link to={"/contact"} className="p-4">
           Contact
+        </Link>
+        <Link
+          className="border border-gray-200 px-4 py-2 hover:bg-yellow-500 transition rounded-2xl"
+          to={"/login"}
+        >
+          Login
         </Link>
       </div>
     </nav>

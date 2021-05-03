@@ -18,14 +18,14 @@ export default function Dropdown({ isOpen, toggle }) {
       <Link to={"/shop"} className="p-4">
         Shop
       </Link>
-      <Link to={"/cart"} className="p-4">
-        Cart
-      </Link>
       <Link to={"/aboutus"} className="p-4">
         About us
       </Link>
       <Link to={"/contact"} className="p-4">
         Contact
+      </Link>
+      <Link to={"/login"} className="p-4">
+        Login
       </Link>
     </div>
   );

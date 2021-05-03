@@ -6,11 +6,19 @@ import Shop from "./components/Shop";
 import Dropdown from "./components/Dropdown";
 
 import "./custom.css";
+
+//COMPONENTS
 import AboutUs from "./components/AboutUs";
 import Contact from "./components/Contact";
+import Login from "./components/Login";
+
+//REDUX
+import { useDispatch } from "react-redux";
+import { loadUsers } from "./redux/userLoadingActions";
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -30,6 +38,17 @@ export default function App() {
     };
   });
 
+  useEffect(() => {
+    fetch("https://localhost:44304/api/users/")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        dispatch(loadUsers(data));
+        console.log(data);
+      });
+  }, [dispatch]);
+
   return (
     <Router>
       <Navbar toggle={toggle} />
@@ -39,6 +58,7 @@ export default function App() {
         <Route path="/shop" component={Shop} />
         <Route path="/contact" component={Contact} />
         <Route path="/aboutus" component={AboutUs} />
+        <Route path="/login" component={Login} />
       </Switch>
     </Router>
   );
