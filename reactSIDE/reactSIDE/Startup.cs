@@ -19,6 +19,7 @@ namespace reactSIDE
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,6 +30,17 @@ namespace reactSIDE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://example.com/",
+                                            "http://www.contoso.com/%22");
+    
+                    });
+            });
+
             services.AddDbContext<GBCONTEXT>(opt => opt.UseSqlServer
             (Configuration.GetConnectionString("gbConnection")));
 
@@ -69,7 +81,7 @@ namespace reactSIDE
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
