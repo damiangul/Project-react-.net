@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import LogoutButton from "./LogoutButton";
 
 export default function Dropdown({ isOpen, toggle }) {
+  const loggedUser = useSelector((store) => store.loggedUser);
+
   return (
     <div
       className={
@@ -24,9 +28,17 @@ export default function Dropdown({ isOpen, toggle }) {
       <Link to={"/contact"} className="p-4">
         Contact
       </Link>
-      <Link to={"/login"} className="p-4">
-        Login
-      </Link>
+      {loggedUser ? null : (
+        <Link to={"/login"} className="p-4">
+          Login
+        </Link>
+      )}
+      {loggedUser ? (
+        <Link to={"/cart"} className="p-4">
+          Cart
+        </Link>
+      ) : null}
+      {loggedUser ? <LogoutButton /> : null}
     </div>
   );
 }

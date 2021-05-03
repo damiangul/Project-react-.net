@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import LogoutButton from "./LogoutButton";
 
 const Navbar = ({ toggle }) => {
+  const loggedUser = useSelector((store) => store.loggedUser);
+
   return (
     <nav
       className="flex justify-between items-center h-16 bg-white text-black relative shadow-sm font-mono"
@@ -39,12 +43,20 @@ const Navbar = ({ toggle }) => {
         <Link to={"/contact"} className="p-4">
           Contact
         </Link>
-        <Link
-          className="border border-gray-200 px-4 py-2 hover:bg-yellow-500 transition rounded-2xl"
-          to={"/login"}
-        >
-          Login
-        </Link>
+        {loggedUser ? null : (
+          <Link
+            className="border border-gray-200 px-4 py-2 hover:bg-yellow-500 transition rounded-2xl"
+            to={"/login"}
+          >
+            Login
+          </Link>
+        )}
+        {loggedUser ? (
+          <Link to={"/cart"} className="p-4">
+            Cart
+          </Link>
+        ) : null}
+        {loggedUser ? <LogoutButton /> : null}
       </div>
     </nav>
   );
