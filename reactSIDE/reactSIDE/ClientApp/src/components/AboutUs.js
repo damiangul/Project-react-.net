@@ -73,7 +73,7 @@ export default function AboutUs() {
                   <animated.li style={firstLiStyle} class="flex items-start">
                     <span class="h-6 flex items-center sm:h-7">
                       <svg
-                        class="flex-shrink-0 h-5 w-5 text-cyan-500"
+                        class="flex-shrink-0 h-5 w-5 text-yellow-500"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -91,7 +91,7 @@ export default function AboutUs() {
                   <animated.li style={secondLiStyle} class="flex items-start">
                     <span class="h-6 flex items-center sm:h-7">
                       <svg
-                        class="flex-shrink-0 h-5 w-5 text-cyan-500"
+                        class="flex-shrink-0 h-5 w-5 text-yellow-500"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -110,7 +110,7 @@ export default function AboutUs() {
                   <animated.li style={thirdLiStyle} class="flex items-start">
                     <span class="h-6 flex items-center sm:h-7">
                       <svg
-                        class="flex-shrink-0 h-5 w-5 text-cyan-500"
+                        class="flex-shrink-0 h-5 w-5 text-yellow-500"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
