@@ -58,22 +58,25 @@ export default function AboutUs() {
   });
 
   return (
-    <div class="h-imageTheWeeknd bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-      <div class="relative py-3 sm:max-w-7xl sm:mx-auto">
-        <div class="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-500 shadow-lg transform -skew-y-12 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-        <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-          <div class="max-w-md mx-auto">
-            <div class="divide-y divide-gray-200">
-              <div class="py-8 text-base leading-6 space-y-8 text-gray-700 sm:text-lg sm:leading-7">
+    <div className="h-imageTheWeeknd bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+      <div className="relative py-3 sm:max-w-7xl sm:mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-500 shadow-lg transform -skew-y-12 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+        <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+          <div className="max-w-md mx-auto">
+            <div className="divide-y divide-gray-200">
+              <div className="py-8 text-base leading-6 space-y-8 text-gray-700 sm:text-lg sm:leading-7">
                 <animated.p style={pStyle}>
                   We are <strong>number one</strong> CD shop in Europe! Our goal
                   is to provide everyone with a dream album.
                 </animated.p>
-                <ul class="list-disc space-y-2">
-                  <animated.li style={firstLiStyle} class="flex items-start">
-                    <span class="h-6 flex items-center sm:h-7">
+                <ul className="list-disc space-y-2">
+                  <animated.li
+                    style={firstLiStyle}
+                    className="flex items-start"
+                  >
+                    <span className="h-6 flex items-center sm:h-7">
                       <svg
-                        class="flex-shrink-0 h-5 w-5 text-yellow-500"
+                        className="flex-shrink-0 h-5 w-5 text-yellow-500"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -84,14 +87,17 @@ export default function AboutUs() {
                         />
                       </svg>
                     </span>
-                    <p class="ml-2">
+                    <p className="ml-2">
                       Over <strong>72444</strong> thousands of CDs sold!
                     </p>
                   </animated.li>
-                  <animated.li style={secondLiStyle} class="flex items-start">
-                    <span class="h-6 flex items-center sm:h-7">
+                  <animated.li
+                    style={secondLiStyle}
+                    className="flex items-start"
+                  >
+                    <span className="h-6 flex items-center sm:h-7">
                       <svg
-                        class="flex-shrink-0 h-5 w-5 text-yellow-500"
+                        className="flex-shrink-0 h-5 w-5 text-yellow-500"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -102,15 +108,18 @@ export default function AboutUs() {
                         />
                       </svg>
                     </span>
-                    <p class="ml-2">
+                    <p className="ml-2">
                       We are providing music from over <strong>1000</strong>{" "}
                       artists!
                     </p>
                   </animated.li>
-                  <animated.li style={thirdLiStyle} class="flex items-start">
-                    <span class="h-6 flex items-center sm:h-7">
+                  <animated.li
+                    style={thirdLiStyle}
+                    className="flex items-start"
+                  >
+                    <span className="h-6 flex items-center sm:h-7">
                       <svg
-                        class="flex-shrink-0 h-5 w-5 text-yellow-500"
+                        className="flex-shrink-0 h-5 w-5 text-yellow-500"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -121,7 +130,7 @@ export default function AboutUs() {
                         />
                       </svg>
                     </span>
-                    <p class="ml-2">
+                    <p className="ml-2">
                       <strong>10</strong> years on the market!
                     </p>
                   </animated.li>
