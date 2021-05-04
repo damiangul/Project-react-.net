@@ -13,5 +13,9 @@ namespace reactSIDE.Data
         IEnumerable<SiteUser> getAllSiteUser();
         SiteUser GetSiteUserById(int id);
         void CreateSiteUser(SiteUser ptc);
+
+        IEnumerable<Item> getAllItems();
+        Item getItemById(int id);
+        void CreateItem(Item ptc);
     }
 }

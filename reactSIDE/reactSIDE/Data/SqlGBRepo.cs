@@ -54,14 +54,32 @@ namespace reactSIDE.Data
             return _context.SiteUsers.FirstOrDefault(p => p.Id == id);
         }
 
+        public void CreateItem(Item ptc)
+        {
+            if (ptc == null)
+            {
+                throw new ArgumentNullException(nameof(ptc));
+            }
 
+            _context.Items.Add(ptc);
+        }
 
+        public IEnumerable<Item> getAllItems()
+        {
+            return _context.Items.ToList();
+        }
 
+        public Item getItemById(int id)
+        {
+            return _context.Items.FirstOrDefault(p => p.Id == id);
+        }
 
 
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >=0);
         }
+
+  
     }
 }

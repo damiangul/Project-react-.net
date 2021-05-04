@@ -12,5 +12,6 @@ namespace reactSIDE.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<SiteUser> SiteUsers { get; set; }
+        public DbSet<Item> Items { get; set; }
     }
 }
