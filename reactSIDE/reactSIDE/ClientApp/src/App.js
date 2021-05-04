@@ -15,6 +15,8 @@ import Login from "./components/Login";
 //REDUX
 import { useDispatch } from "react-redux";
 import { loadUsers } from "./redux/userLoadingActions";
+import { loadProducts } from "./redux/productsLoadingActions";
+import ProductDetail from "./components/ProductDetail";
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +47,15 @@ export default function App() {
       })
       .then((data) => {
         dispatch(loadUsers(data));
+      });
+
+    fetch("https://localhost:44304/api/products")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
         console.log(data);
+        dispatch(loadProducts(data));
       });
   }, [dispatch]);
 
@@ -56,6 +66,10 @@ export default function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/shop" component={Shop} />
+        <Route
+          path="/product/:id"
+          render={(props) => <ProductDetail {...props} />}
+        />
         <Route path="/contact" component={Contact} />
         <Route path="/aboutus" component={AboutUs} />
         <Route path="/login" component={Login} />
