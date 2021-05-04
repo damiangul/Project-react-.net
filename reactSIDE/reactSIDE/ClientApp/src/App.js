@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { loadUsers } from "./redux/userLoadingActions";
 import { loadProducts } from "./redux/productsLoadingActions";
 import ProductDetail from "./components/ProductDetail";
+import Cart from "./components/Cart";
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,6 +74,7 @@ export default function App() {
         <Route path="/contact" component={Contact} />
         <Route path="/aboutus" component={AboutUs} />
         <Route path="/login" component={Login} />
+        <Route path="/cart" component={Cart} />
       </Switch>
     </Router>
   );
