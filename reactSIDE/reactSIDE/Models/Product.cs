@@ -13,5 +13,14 @@ namespace reactSIDE.Models
         public string Author {get;set;}
         [Required]
         public string Genre {get;set;}
+
+        [Required]
+        public string DataWydania { get; set; }
+        [Required]
+        public string Foto { get; set; }
+        
+        [Required]
+        public string Price { get; set; }
+
     }
 }

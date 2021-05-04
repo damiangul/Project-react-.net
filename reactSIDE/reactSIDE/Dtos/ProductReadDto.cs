@@ -10,6 +10,14 @@ namespace reactSIDE.Dtos
         public string Title {get;set;}
       
         public string Author {get;set;}
-      
+
+        public string Genre { get; set; }
+
+        public string DataWydania { get; set; }
+
+        public string Foto { get; set; }
+
+        public string Price { get; set; }
+
     }
 }
