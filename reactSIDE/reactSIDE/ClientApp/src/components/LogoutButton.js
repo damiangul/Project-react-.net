@@ -5,7 +5,7 @@ import { loggingUser } from "../redux/loggedUserActions";
 export default function LogoutButton() {
   const dispatch = useDispatch();
   const logoutUser = () => {
-    dispatch(loggingUser(""));
+    dispatch(loggingUser("", null));
   };
 
   return (

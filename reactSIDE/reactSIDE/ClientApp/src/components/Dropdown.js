@@ -28,17 +28,17 @@ export default function Dropdown({ isOpen, toggle }) {
       <Link to={"/contact"} className="p-4">
         Contact
       </Link>
-      {loggedUser ? null : (
+      {loggedUser[0] ? null : (
         <Link to={"/login"} className="p-4">
           Login
         </Link>
       )}
-      {loggedUser ? (
+      {loggedUser[0] ? (
         <Link to={"/cart"} className="p-4">
           Cart
         </Link>
       ) : null}
-      {loggedUser ? <LogoutButton /> : null}
+      {loggedUser[0] ? <LogoutButton /> : null}
     </div>
   );
 }

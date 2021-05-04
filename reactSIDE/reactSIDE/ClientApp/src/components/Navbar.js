@@ -43,7 +43,7 @@ const Navbar = ({ toggle }) => {
         <Link to={"/contact"} className="p-4">
           Contact
         </Link>
-        {loggedUser ? null : (
+        {loggedUser[0] ? null : (
           <Link
             className="border border-gray-200 px-4 py-2 hover:bg-yellow-500 transition rounded-2xl"
             to={"/login"}
@@ -51,12 +51,12 @@ const Navbar = ({ toggle }) => {
             Login
           </Link>
         )}
-        {loggedUser ? (
+        {loggedUser[0] ? (
           <Link to={"/cart"} className="p-4">
             Cart
           </Link>
         ) : null}
-        {loggedUser ? <LogoutButton /> : null}
+        {loggedUser[0] ? <LogoutButton /> : null}
       </div>
     </nav>
   );
