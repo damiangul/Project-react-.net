@@ -42,25 +42,25 @@ export default function Contact() {
       >
         <input
           placeholder="What you want to ask us?"
-          className="border-2 p-3 rounded-full outline-none"
+          className="border-2 p-3 rounded-full outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition"
           type="text"
           name="subject"
         />
         <input
           placeholder="What's your name?"
-          className="border-2 p-3 rounded-full outline-none"
+          className="border-2 p-3 rounded-full outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition"
           type="text"
           name="name"
         />
         <input
           placeholder="Type your email address"
-          className="border-2 p-3 rounded-full outline-none"
+          className="border-2 p-3 rounded-full outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition"
           type="email"
           name="email"
         />
         <textarea
           placeholder="Tell us more about your subject"
-          className="border-2 p-3 outline-none"
+          className="border-2 p-3 outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition"
           name="message"
         />
         <input
