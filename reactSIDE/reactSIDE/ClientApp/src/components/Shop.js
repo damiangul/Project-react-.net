@@ -37,23 +37,27 @@ export default function Shop() {
 
   // JAK BEDZIE WIECEJ PLYT NA STRONIE TO SIE DODA TO
   const nextPage = () => {
-    const productsLength = productsOnSite.Length;
+    const productsLength = productsOnSite.length;
 
-    // if (showTo < productsLength) {
-    //   setShowFrom(showFrom + 5);
-    // }
+    if (showTo < productsLength) {
+      setShowFrom(showFrom + 4);
+    }
 
-    // if (showTo + 5 > productsLength) {
-    //   setShowTo(showTo + (productsLength - showTo));
-    // }
-
-    setShowFrom(4);
-    setShowTo(8);
+    if (showTo + 4 > productsLength) {
+      setShowTo(showTo + (productsLength - showTo));
+    } else {
+      setShowTo(showTo + 4);
+    }
   };
 
   const previousPage = () => {
-    setShowFrom(0);
-    setShowTo(4);
+    if (showFrom - 4 >= 0) {
+      setShowFrom(showFrom - 4);
+    }
+
+    if (showFrom > 0) {
+      setShowTo(showTo - 4);
+    }
   };
 
   return (
