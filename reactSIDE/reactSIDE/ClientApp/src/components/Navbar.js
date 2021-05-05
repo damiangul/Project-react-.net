@@ -43,6 +43,9 @@ const Navbar = ({ toggle }) => {
         <Link to={"/contact"} className="p-4">
           Contact
         </Link>
+        <Link to={"/addNewCd"} className="p-4">
+          NewCd
+        </Link>
         {loggedUser[0] ? null : (
           <Link
             className="border border-gray-200 px-4 py-2 hover:bg-yellow-500 transition rounded-2xl"

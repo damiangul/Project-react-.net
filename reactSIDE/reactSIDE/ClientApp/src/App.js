@@ -18,6 +18,7 @@ import { loadUsers } from "./redux/userLoadingActions";
 import { loadProducts } from "./redux/productsLoadingActions";
 import ProductDetail from "./components/ProductDetail";
 import Cart from "./components/Cart";
+import NewCd from "./components/NewCd";
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,6 +76,7 @@ export default function App() {
         <Route path="/aboutus" component={AboutUs} />
         <Route path="/login" component={Login} />
         <Route path="/cart" component={Cart} />
+        <Route path="/addNewCd" component={NewCd} />
       </Switch>
     </Router>
   );
