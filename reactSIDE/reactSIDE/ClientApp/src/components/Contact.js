@@ -24,9 +24,9 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex flex-col justify-between items-center h-imageTheWeeknd bg-gray-100">
+    <div className="flex flex-col justify-between items-center h-imageTheWeeknd bg-background-ballons font-bold">
       <div className="mt-20">
-        <h2 className="font-mono text-lg text-center lg:text-4xl">
+        <h2 className="font-mono text-lg text-center lg:text-4xl text-white">
           Have questions? Ask us via email.
         </h2>
         <img
@@ -64,7 +64,7 @@ export default function Contact() {
           name="message"
         />
         <input
-          className="w-full md:w-32 mx-auto p-1 rounded-2xl bg-yellow-300 hover:bg-yellow-500 cursor-pointer transition"
+          className="w-full md:w-32 mx-auto p-1 rounded-2xl bg-yellow-300 hover:bg-yellow-500 cursor-pointer transition text-black"
           type="submit"
           value="Send"
         />

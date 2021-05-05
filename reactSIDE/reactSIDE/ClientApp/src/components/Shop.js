@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 export default function Shop() {
   // W tym api jest id, title, author, dataWydania, genre, price, foto i title.
@@ -9,16 +10,16 @@ export default function Shop() {
   const loggedUser = useSelector((store) => store.loggedUser);
   console.log(loggedUser);
   //IMPLMENTACJA PRZY WIEKSZEJ ILOSCI PLYT
-  // const [showFrom, setShowFrom] = useState(0);
-  // const [showTo, setShowTo] = useState(5);
+  const [showFrom, setShowFrom] = useState(0);
+  const [showTo, setShowTo] = useState(4);
 
   const productsOnSite = products.map((product) => (
     <div
       key={product.id}
-      className="flex flex-row p-4 mx-5 my-2 border border-yellow-600 rounded lg:w-2/5"
+      className="flex flex-row p-4 mx-5 my-2 border border-yellow-600 rounded lg:w-2/5 bg-white"
     >
       <div className="w-1/2">
-        <img className="object-fill" src={product.foto} alt={product.title} />
+        <img className="object-cover" src={product.foto} alt={product.title} />
       </div>
       <div className="flex flex-col justify-center items-center w-1/2 font-mono md:text-3xl lg:text-xl">
         <p className="text-center">"{product.title}"</p>
@@ -34,33 +35,33 @@ export default function Shop() {
     </div>
   ));
 
-  //JAK BEDZIE WIECEJ PLYT NA STRONIE TO SIE DODA TO
-  // const nextPage = () => {
-  //   const productsLength = productsOnSite.Length;
+  // JAK BEDZIE WIECEJ PLYT NA STRONIE TO SIE DODA TO
+  const nextPage = () => {
+    const productsLength = productsOnSite.Length;
 
-  //   // if (showTo < productsLength) {
-  //   //   setShowFrom(showFrom + 5);
-  //   // }
+    // if (showTo < productsLength) {
+    //   setShowFrom(showFrom + 5);
+    // }
 
-  //   // if (showTo + 5 > productsLength) {
-  //   //   setShowTo(showTo + (productsLength - showTo));
-  //   // }
+    // if (showTo + 5 > productsLength) {
+    //   setShowTo(showTo + (productsLength - showTo));
+    // }
 
-  //   setShowFrom(5);
-  //   setShowTo(8);
-  // };
+    setShowFrom(4);
+    setShowTo(8);
+  };
 
-  // const previousPage = () => {
-  //   setShowFrom(0);
-  //   setShowTo(5);
-  // };
+  const previousPage = () => {
+    setShowFrom(0);
+    setShowTo(4);
+  };
 
   return (
-    <>
-      <div className="flex flex-col lg:flex-row lg:flex-wrap lg:justify-around lg:items-center ">
-        {productsOnSite}
+    <div className="bg-background-ballons">
+      <div className="flex flex-col lg:flex-row lg:flex-wrap lg:justify-around lg:items-center py-20">
+        {productsOnSite.slice(showFrom, showTo)}
       </div>
-      {/* <div className="flex flex-row justify-around m-5 w-1/2 mx-auto">
+      <div className="flex flex-row justify-around pb-12 w-1/4 mx-auto">
         <button
           onClick={previousPage}
           className="bg-yellow-500 p-4 rounded-full focus:outline-none"
@@ -99,7 +100,8 @@ export default function Shop() {
             />
           </svg>
         </button>
-      </div> */}
-    </>
+      </div>
+      <Footer />
+    </div>
   );
 }

@@ -11,6 +11,11 @@ module.exports = {
       colors: {
         "light-blue": colors.lightBlue,
         cyan: colors.cyan,
+        yellow: colors.yellow,
+      },
+      backgroundImage: {
+        "background-ballons":
+          "linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5) ), url('./images/background.jpg')",
       },
     },
   },
