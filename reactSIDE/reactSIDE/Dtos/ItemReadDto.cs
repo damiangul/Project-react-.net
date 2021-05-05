@@ -12,6 +12,9 @@ namespace reactSIDE.Dtos
         public int UserID { get; set; }
 
         public int Quantity { get; set; }
+        public int Type { get; set; }
+        public string AddTime { get; set; }
+
 
     }
 }

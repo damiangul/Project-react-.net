@@ -21,6 +21,8 @@ namespace reactSIDE.Models
         
         [Required]
         public string Price { get; set; }
+        [Required]
+        public string Quantity { get; set; }
 
     }
 }

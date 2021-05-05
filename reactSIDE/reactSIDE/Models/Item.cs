@@ -12,6 +12,11 @@ namespace reactSIDE.Models
         [Required]
         public int UserID { get;set;}
         [Required]
-        public int Quantity { get;set;}  
+        public int Quantity { get;set;}
+        [Required]
+        public int Type { get; set; }
+        [Required]
+        public string AddTime { get; set; }
+
     }
 }

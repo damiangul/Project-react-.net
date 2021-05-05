@@ -16,5 +16,6 @@ namespace reactSIDE.Dtos
         public string Foto { get; set; }
 
         public string Price { get; set; }
+        public string Quantity { get; set; }
     }
 }
