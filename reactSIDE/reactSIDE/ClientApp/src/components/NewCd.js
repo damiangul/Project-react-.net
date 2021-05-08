@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { newCd } from "../redux/newCdActions";
-
 
 export default function NewCd() {
   const newCdAdd = useSelector((store) => store.newCdAdd);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [genre, setGenre] = useState("");
@@ -42,46 +41,43 @@ export default function NewCd() {
   const quantityOnChange = (e) => {
     setQuantity(e.target.value);
   };
-  
+
   const addNewCd = (e) => {
     e.preventDefault();
-    dispatch(newCd(title, author, genre, dataWydania, foto, price, quantity))
+    dispatch(newCd(title, author, genre, dataWydania, foto, price, quantity));
     setCdAdded(true);
-    
   };
 
   useEffect(() => {
-    if(cdAdded)
-    {
+    if (cdAdded) {
       const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        body: JSON.stringify({ 
-          title:newCdAdd[0],
-          author:newCdAdd[1],
-          genre:newCdAdd[2],
-          dataWydania:newCdAdd[3],
-          foto:newCdAdd[4],
-          price:newCdAdd[5],
-          quantity:newCdAdd[6]
-         })
-    };
-    fetch('https://localhost:44304/api/products/', requestOptions)
-        .then(response => response.json())
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        body: JSON.stringify({
+          title: newCdAdd[0],
+          author: newCdAdd[1],
+          genre: newCdAdd[2],
+          dataWydania: newCdAdd[3],
+          foto: newCdAdd[4],
+          price: newCdAdd[5],
+          quantity: newCdAdd[6],
+        }),
+      };
+      fetch(
+        "https://localhost:44304/api/products/",
+        requestOptions
+      ).then((response) => response.json());
     }
-   
   }, [cdAdded]);
 
   return (
     <div className="bg-background-ballons h-imageTheWeeknd">
-       
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-4/5 border w-3/4 rounded-3xl md:w-1/2 xl:w-1/4 bg-white">
         <h2 className="text-center font-mono h-1/3 flex justify-center items-center text-2xl">
-        {cdAdded ? <h2>New cd added</h2>: <h2>Add new cd</h2>}
+          {cdAdded ? <h2>New cd added</h2> : <h2>Add new cd</h2>}
         </h2>
-       
-        <form className="flex flex-col w-4/5 mx-auto mb-16 h-2/4 justify-around">
 
+        <form className="flex flex-col w-4/5 mx-auto mb-16 h-2/4 justify-around">
           <input
             placeholder="Title"
             className="border-2 p-3 rounded-full outline-none"
@@ -116,7 +112,7 @@ export default function NewCd() {
             onChange={dataWydaniaOnChange}
           />
 
-           <input
+          <input
             placeholder="Foto"
             className="border-2 p-3 rounded-full outline-none"
             type="text"

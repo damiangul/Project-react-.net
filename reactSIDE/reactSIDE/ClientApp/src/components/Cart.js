@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCart } from "../redux/cartActions";
 
@@ -26,7 +26,6 @@ export default function Cart() {
   const boughtProducts = usersCartLoaded.filter(
     (element) => element.type === 1
   );
-  console.log(cartProducts, boughtProducts);
 
   const cartElements = cartProducts.map((cartElement) => {
     const product = products.find(
