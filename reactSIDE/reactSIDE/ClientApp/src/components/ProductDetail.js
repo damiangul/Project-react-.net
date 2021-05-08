@@ -1,21 +1,50 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../redux/cartActions";
 
 export default function ProductDetail({ match }) {
   const products = useSelector((store) => store.products);
   const loggedUser = useSelector((store) => store.loggedUser);
+  const usersCartLoaded = useSelector((store) => store.cart); //Koszyk zalogowanego uczestnika
+  const dispatch = useDispatch();
 
   const selectedProduct = products.find(
     (product) => Number(match.params.id) === product.id
   );
 
-  console.log(selectedProduct);
+  const handleAddToCart = () => {
+    let alreadyBought = false;
+
+    const cdExists = usersCartLoaded.filter((element) => {
+      return (
+        element.userID === loggedUser[1] &&
+        element.type === 0 &&
+        element.productID === selectedProduct.id
+      );
+    });
+
+    if (cdExists) {
+      alreadyBought = !alreadyBought;
+    }
+
+    const boughtProduct = {
+      userID: loggedUser[1],
+      productID: selectedProduct.id,
+      alreadyInCart: alreadyBought,
+    };
+
+    dispatch(addToCart(boughtProduct));
+  };
 
   return (
     <div className="bg-gray-100 h-imageTheWeeknd">
       <div className="md:text-2xl lg:flex lg:flex-col lg:p-2 lg:w-1/2 lg:mx-auto">
-        <div className="sm:w-1/2 sm:mx-auto lg:w-3/5">
-          <img src={selectedProduct.foto} alt={selectedProduct.title} />
+        <div className="sm:w-1/2 mx-auto lg:w-3/5">
+          <img
+            className="mx-auto"
+            src={selectedProduct.foto}
+            alt={selectedProduct.title}
+          />
         </div>
         <div>
           <div className="mt-6">
@@ -28,8 +57,11 @@ export default function ProductDetail({ match }) {
             <h3 className="text-center">Date: {selectedProduct.dataWydania}</h3>
           </div>
           <div className="relative">
-            {loggedUser ? (
-              <button className="absolute left-1/2 transform -translate-x-1/2 w-full sm:w-32 mt-6 mx-auto p-1 rounded-2xl bg-yellow-300 hover:bg-yellow-500 cursor-pointer transition focus:outline-none">
+            {loggedUser[0] ? (
+              <button
+                onClick={handleAddToCart}
+                className="absolute left-1/2 transform -translate-x-1/2 w-full sm:w-32 mt-6 mx-auto p-1 rounded-2xl bg-yellow-300 hover:bg-yellow-500 cursor-pointer transition focus:outline-none"
+              >
                 Buy now
               </button>
             ) : (
