@@ -4,6 +4,7 @@ using reactSIDE.Data;
 using reactSIDE.Dtos;
 using reactSIDE.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace reactSIDE.Controllers
 {
@@ -21,28 +22,28 @@ namespace reactSIDE.Controllers
         }
 
 
-        //Get api/items
+        //GET api/items
         [HttpGet]
         public ActionResult<IEnumerable<ItemReadDto>> getAllItems()
         {
-            var items= _repository.getAllItems();
+            var items = _repository.getAllItems();
 
             return Ok(_mapper.Map<IEnumerable<ItemReadDto>>(items));
         }
 
-        //Get api/items/5
-        [HttpGet("{id}", Name= "getItemById")]
-        public ActionResult <ItemReadDto> getItemById(int id)
+        //GET api/items/5
+        [HttpGet("{id}", Name = "getItemById")]
+        public ActionResult<ItemReadDto> getItemById(int id)
         {
-             var items = _repository.getItemById(id);
-             if(items != null)
-             {
-                 return Ok(_mapper.Map<ItemReadDto>(items));
-             }
-             return NotFound();
+            var items = _repository.getItemById(id);
+            if (items != null)
+            {
+                return Ok(_mapper.Map<ItemReadDto>(items));
+            }
+            return NotFound();
         }
 
-        //Post api/items
+        //POST api/items
         [HttpPost]
         public ActionResult<ItemReadDto> CreateItem(ItemCreateDto itemCreateDto)
         {
@@ -51,7 +52,45 @@ namespace reactSIDE.Controllers
             _repository.SaveChanges();
             var itemReadDto = _mapper.Map<ItemReadDto>(itemsModel);
 
-            return CreatedAtRoute(nameof(getItemById), new {Id = itemReadDto.Id}, itemReadDto);
+            return CreatedAtRoute(nameof(getItemById), new { Id = itemReadDto.Id }, itemReadDto);
+        }
+
+        //PUT api/items/5
+        [HttpPut("{id}")]
+        public ActionResult UpdateItem(int id,ItemUpdateDto itemUpdateDto)
+        {
+            var itemModelFromRepository = _repository.getItemById(id);
+            if(itemModelFromRepository==null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(itemUpdateDto, itemModelFromRepository);
+            _repository.UpdateItem(itemModelFromRepository);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        //PATCH api/items/5
+        [HttpPatch("{id}")]
+        public ActionResult PartialUpdateItem(int id,JsonPatchDocument<ItemUpdateDto> patchDoc)
+        {
+            var itemModelFromRepository = _repository.getItemById(id);
+            if (itemModelFromRepository == null)
+            {
+                return NotFound();
+            }
+            var itemToPatch = _mapper.Map<ItemUpdateDto>(itemModelFromRepository);
+            patchDoc.ApplyTo(itemToPatch, ModelState);
+            if(!TryValidateModel(itemToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+            _mapper.Map(itemToPatch, itemModelFromRepository);
+            _repository.UpdateItem(itemModelFromRepository);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }

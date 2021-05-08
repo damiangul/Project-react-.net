@@ -80,6 +80,9 @@ namespace reactSIDE.Data
             return (_context.SaveChanges() >=0);
         }
 
-  
+        public void UpdateItem(Item ptc)
+        {
+           //method for interface
+        }
     }
 }

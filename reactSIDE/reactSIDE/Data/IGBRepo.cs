@@ -17,5 +17,6 @@ namespace reactSIDE.Data
         IEnumerable<Item> getAllItems();
         Item getItemById(int id);
         void CreateItem(Item ptc);
+        void UpdateItem(Item ptc);
     }
 }

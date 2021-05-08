@@ -10,6 +10,8 @@ namespace gb.Profiles
         {
             CreateMap<Item, ItemReadDto>();
             CreateMap<ItemCreateDto, Item>();
+            CreateMap<ItemUpdateDto, Item>();
+            CreateMap<Item, ItemUpdateDto>();
         }
     }
 }

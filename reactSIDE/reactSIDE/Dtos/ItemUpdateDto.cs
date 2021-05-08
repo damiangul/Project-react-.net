@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace reactSIDE.Dtos
 {
-    public class ItemCreateDto
+    public class ItemUpdateDto
     {
         [Required]
         public int ProductID { get; set; }
