@@ -43,9 +43,7 @@ export default function Shop() {
       setShowFrom(showFrom + 4);
     }
 
-    if (showTo + 4 > productsLength) {
-      setShowTo(showTo + (productsLength - showTo));
-    } else {
+    if (showTo < productsLength) {
       setShowTo(showTo + 4);
     }
   };
