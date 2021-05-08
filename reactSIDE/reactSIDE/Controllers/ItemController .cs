@@ -92,5 +92,20 @@ namespace reactSIDE.Controllers
 
             return NoContent();
         }
+
+        //DELETE api/items/5
+        [HttpDelete("{id}")]
+        public ActionResult DeleteItem(int id)
+        {
+            var itemModelFromRepository = _repository.getItemById(id);
+            if (itemModelFromRepository == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteItem(itemModelFromRepository);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }

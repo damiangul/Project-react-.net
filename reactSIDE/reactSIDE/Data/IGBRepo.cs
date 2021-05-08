@@ -18,5 +18,6 @@ namespace reactSIDE.Data
         Item getItemById(int id);
         void CreateItem(Item ptc);
         void UpdateItem(Item ptc);
+        void DeleteItem(Item ptc);
     }
 }
