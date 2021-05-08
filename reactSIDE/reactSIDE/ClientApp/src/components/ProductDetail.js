@@ -1,19 +1,22 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartActions";
+import { useHistory } from "react-router-dom";
 
 export default function ProductDetail({ match }) {
   const products = useSelector((store) => store.products);
   const loggedUser = useSelector((store) => store.loggedUser);
   const usersCartLoaded = useSelector((store) => store.cart); //Koszyk zalogowanego uczestnika
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const selectedProduct = products.find(
     (product) => Number(match.params.id) === product.id
   );
 
   const handleAddToCart = () => {
-    let alreadyBought = false;
+    let alreadyBoughtID = -1;
+    let quantity = 1;
 
     const cdExists = usersCartLoaded.filter((element) => {
       return (
@@ -23,17 +26,20 @@ export default function ProductDetail({ match }) {
       );
     });
 
-    if (cdExists) {
-      alreadyBought = !alreadyBought;
+    if (cdExists.length !== 0) {
+      alreadyBoughtID = cdExists[0].id;
+      quantity = cdExists[0].quantity;
     }
 
     const boughtProduct = {
       userID: loggedUser[1],
       productID: selectedProduct.id,
-      alreadyInCart: alreadyBought,
+      alreadyBoughtID,
+      quantity,
     };
 
     dispatch(addToCart(boughtProduct));
+    history.push("/");
   };
 
   return (

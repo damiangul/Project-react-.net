@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCart } from "../redux/cartActions";
+import { useHistory } from "react-router-dom";
 
 export default function Cart() {
   const dispatch = useDispatch();
+  const history = useHistory();
   let totalPrice = 0;
   const loggedUser = useSelector((store) => store.loggedUser);
   const products = useSelector((store) => store.products);
@@ -102,12 +104,40 @@ export default function Cart() {
     );
   });
 
+  boughtElements.reverse();
+
+  const handleBuy = () => {
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify([
+        {
+          op: "replace",
+          path: "/type",
+          value: 1,
+        },
+      ]),
+    };
+
+    cartProducts.forEach((element) => {
+      fetch(
+        `https://localhost:44304/api/items/${element.id}`,
+        requestOptions
+      ).then((response) => response.json());
+    });
+
+    history.push("/");
+  };
+
   return (
     <div>
       <div className="w-2/3 mx-auto lg:w-4/5 2xl:w-1/2 border shadow-lg p-7 mt-4">
         <h2 className="text-center mb-4 uppercase font-bold">Cart</h2>
         {cartElements}
-        <button className="p-2 rounded-2xl bg-yellow-300 hover:bg-yellow-500 cursor-pointer transition focus:outline-none">
+        <button
+          onClick={handleBuy}
+          className="p-2 rounded-2xl bg-yellow-300 hover:bg-yellow-500 cursor-pointer transition focus:outline-none"
+        >
           Buy now for {totalPrice}
         </button>
       </div>

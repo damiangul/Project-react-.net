@@ -11,10 +11,25 @@ export const cartReducer = (state = [], action) => {
         quantity,
         type,
         addTime,
-        alreadyInCart,
+        alreadyBoughtID,
       } = action.payload;
 
-      if (alreadyInCart) {
+      if (alreadyBoughtID !== -1) {
+        const requestOptions = {
+          method: "PUT",
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+          body: JSON.stringify({
+            productID: product,
+            userID: user,
+            quantity: quantity + 1,
+            type: type,
+            addTime: addTime,
+          }),
+        };
+        fetch(
+          `https://localhost:44304/api/items/${alreadyBoughtID}`,
+          requestOptions
+        ).then((response) => response.json());
       } else {
         const requestOptions = {
           method: "POST",

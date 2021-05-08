@@ -7,8 +7,6 @@ export default function Shop() {
   // W tym api jest id, title, author, dataWydania, genre, price, foto i title.
   const products = useSelector((store) => store.products);
 
-  const loggedUser = useSelector((store) => store.loggedUser);
-  console.log(loggedUser);
   //IMPLMENTACJA PRZY WIEKSZEJ ILOSCI PLYT
   const [showFrom, setShowFrom] = useState(0);
   const [showTo, setShowTo] = useState(4);

@@ -8,14 +8,19 @@ export const loadCart = (cart) => ({
   },
 });
 
-export const addToCart = ({ productID, userID, alreadyInCart }) => ({
+export const addToCart = ({
+  productID,
+  userID,
+  alreadyBoughtID,
+  quantity,
+}) => ({
   type: ADD_TO_CART,
   payload: {
     product: productID,
     user: userID,
-    quantity: 1,
+    quantity,
     type: 0,
     addTime: Date().toString(),
-    alreadyInCart,
+    alreadyBoughtID,
   },
 });
