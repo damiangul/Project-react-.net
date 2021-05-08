@@ -84,5 +84,14 @@ namespace reactSIDE.Data
         {
            //method for interface
         }
+
+        public void DeleteItem(Item ptc)
+        {
+            if(ptc==null)
+            {
+               throw new ArgumentNullException(nameof(ptc));
+            }
+            _context.Items.Remove(ptc);
+        }
     }
 }
