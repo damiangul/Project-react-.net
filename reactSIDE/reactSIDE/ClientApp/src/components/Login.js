@@ -34,6 +34,7 @@ export default function Login() {
     } else {
       setFalseLogin(false);
       dispatch(loggingUser(loggedUser[0].userLogin, loggedUser[0].id));
+
       history.push("/");
     }
   };
