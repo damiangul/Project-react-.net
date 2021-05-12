@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace reactSIDE
 {
@@ -31,6 +32,12 @@ namespace reactSIDE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/login";
+                });
+
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -87,6 +94,8 @@ namespace reactSIDE
             app.UseSpaStaticFiles();
             app.UseCors(MyAllowSpecificOrigins);
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -59,8 +59,7 @@ namespace reactSIDE.Data
             if (ptc == null)
             {
                 throw new ArgumentNullException(nameof(ptc));
-            }
-
+            }   
             _context.Items.Add(ptc);
         }
 
@@ -92,6 +91,11 @@ namespace reactSIDE.Data
                throw new ArgumentNullException(nameof(ptc));
             }
             _context.Items.Remove(ptc);
+        }
+
+        public SiteUser LoginUser(SiteUser ptc)
+        {
+            return _context.SiteUsers.FirstOrDefault(p => p.UserLogin == ptc.UserLogin && p.UserPassword==ptc.UserPassword);
         }
     }
 }
