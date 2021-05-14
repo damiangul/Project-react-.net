@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import LogoutButton from "./LogoutButton";
 
 export default function Dropdown({ isOpen, toggle }) {
-  const loggedUser = useSelector((store) => store.loggedUser);
+  const loggedUser_1  = localStorage.getItem("id");
+  const ifLogged = JSON.parse(loggedUser_1);
 
   return (
     <div
@@ -28,17 +28,17 @@ export default function Dropdown({ isOpen, toggle }) {
       <Link to={"/contact"} className="p-4">
         Contact
       </Link>
-      {loggedUser[0] ? null : (
+      {ifLogged === null && (
         <Link to={"/login"} className="p-4">
           Login
         </Link>
       )}
-      {loggedUser[0] ? (
+      {ifLogged !== null ? (
         <Link to={"/cart"} className="p-4">
           Cart
         </Link>
       ) : null}
-      {loggedUser[0] ? <LogoutButton /> : null}
+      {ifLogged !== null ? <LogoutButton /> : null}
     </div>
   );
 }

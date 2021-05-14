@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { loggingUser } from "../redux/loggedUserActions";
+import { useDispatch } from "react-redux";
+import { switchNav } from "../redux/switchNav";
 import { useHistory } from "react-router-dom";
 
 export default function Login() {
-  const users = useSelector((store) => store.users);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [falseLogin, setFalseLogin] = useState(false);
+  let loggedUser;
   const dispatch = useDispatch();
   let history = useHistory();
 
@@ -19,22 +19,33 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-  const loginSubmit = (e) => {
+  const loginSubmit = async (e) => {
     e.preventDefault();
 
-    const loggedUser = users.filter(
-      (user) => user.userLogin === login && user.userPassword === password
-    );
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({
+        "userPassword": password,
+        "userLogin": login
+      }),
+    };
+    await fetch(
+      "https://localhost:44304/api/login/",
+      requestOptions
+    ).then((response) => response.json()).then((res) => {
+      loggedUser = res;
+    });
 
-    if (loggedUser.length === 0) {
+    if (loggedUser.status === 404) {
       setFalseLogin(true);
       setLogin("");
       setPassword("");
       return 0;
     } else {
       setFalseLogin(false);
-      dispatch(loggingUser(loggedUser[0].userLogin, loggedUser[0].id));
-
+      localStorage.setItem("id", JSON.stringify(loggedUser));
+      dispatch(switchNav("XDDDD"))
       history.push("/");
     }
   };

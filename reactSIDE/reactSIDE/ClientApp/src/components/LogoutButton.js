@@ -1,15 +1,19 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { loggingUser } from "../redux/loggedUserActions";
 import { useHistory } from "react-router-dom";
-
+import { switchNav } from "../redux/switchNav"
+ 
 export default function LogoutButton() {
-  const dispatch = useDispatch();
   let history = useHistory();
+  const dispatch = useDispatch();
 
-  const logoutUser = () => {
-    dispatch(loggingUser("", null));
+  const logoutUser = async () => {
+
+    await fetch("https://localhost:44304/api/login/");
+    localStorage.removeItem("id");
+    dispatch(switchNav("XDDD"))
     history.push("/");
+
   };
 
   return (

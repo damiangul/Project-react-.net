@@ -14,7 +14,6 @@ import Login from "./components/Login";
 
 //REDUX
 import { useDispatch } from "react-redux";
-import { loadUsers } from "./redux/userLoadingActions";
 import { loadProducts } from "./redux/productsLoadingActions";
 import ProductDetail from "./components/ProductDetail";
 import Cart from "./components/Cart";
@@ -43,14 +42,6 @@ export default function App() {
   });
 
   useEffect(() => {
-    fetch("https://localhost:44304/api/users/")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        dispatch(loadUsers(data));
-      });
-
     fetch("https://localhost:44304/api/products")
       .then((res) => {
         return res.json();

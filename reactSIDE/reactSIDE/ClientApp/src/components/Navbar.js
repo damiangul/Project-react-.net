@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import LogoutButton from "./LogoutButton";
+import { useSelector } from "react-redux";
 
 const Navbar = ({ toggle }) => {
-  const loggedUser = useSelector((store) => store.loggedUser);
+  const switchNAV = useSelector((store) => store.switchNavState);
+  const loggedUser_1  = localStorage.getItem("id");
+  const ifLogged = JSON.parse(loggedUser_1);
 
   return (
     <nav
@@ -46,7 +48,8 @@ const Navbar = ({ toggle }) => {
         <Link to={"/addNewCd"} className="p-4">
           NewCd
         </Link>
-        {loggedUser[0] ? null : (
+        {switchNAV ? null : null}
+        {ifLogged !== null ? null : (
           <Link
             className="border border-gray-200 px-4 py-2 hover:bg-yellow-500 transition rounded-2xl"
             to={"/login"}
@@ -54,12 +57,12 @@ const Navbar = ({ toggle }) => {
             Login
           </Link>
         )}
-        {loggedUser[0] ? (
+        {ifLogged !== null ? (
           <Link to={"/cart"} className="p-4">
             Cart
           </Link>
         ) : null}
-        {loggedUser[0] ? <LogoutButton /> : null}
+        {ifLogged !== null ? <LogoutButton /> : null}
       </div>
     </nav>
   );
