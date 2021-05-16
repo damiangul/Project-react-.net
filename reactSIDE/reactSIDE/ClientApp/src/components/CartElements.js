@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useSelector } from "react-redux";
 export default function CartElements({
   product,
   cartElement,
@@ -7,14 +7,30 @@ export default function CartElements({
 }) {
   const [quantity, setQuantity] = useState(cartElement.quantity);
 
-  const handleAddCD = () => {
-    setQuantity(quantity + 1);
+  const products = useSelector((store) => store.products);
 
-    handleAmountChange(cartElement.id, quantity + 1);
+  const lookingForQuantity = products.find(
+    (product) => product.id === cartElement.productID
+  );
+  const amountOfCDs = parseInt(lookingForQuantity.quantity);
+
+  const handleAddCD = () => {
+    if (quantity + 1 <= amountOfCDs) {
+      setQuantity(quantity + 1);
+      handleAmountChange(cartElement.id, quantity + 1);
+    }
   };
 
-  const handleDeleteCD = () => {
+  const handleDeleteCD = async () => {
     setQuantity(quantity - 1);
+
+    if (quantity - 1 === 0) {
+      await fetch(`https://localhost:44304/api/items/${cartElement.id}`, {
+        method: "DELETE",
+      }).then(() => {
+        console.log("DELETED");
+      });
+    }
 
     handleAmountChange(cartElement.id, quantity - 1);
   };

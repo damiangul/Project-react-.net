@@ -26,16 +26,15 @@ export default function Login() {
       method: "POST",
       headers: { "Content-Type": "application/json; charset=utf-8" },
       body: JSON.stringify({
-        "userPassword": password,
-        "userLogin": login
+        userPassword: password,
+        userLogin: login,
       }),
     };
-    await fetch(
-      "https://localhost:44304/api/login/",
-      requestOptions
-    ).then((response) => response.json()).then((res) => {
-      loggedUser = res;
-    });
+    await fetch("https://localhost:44304/api/login/", requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        loggedUser = res;
+      });
 
     if (loggedUser.status === 404) {
       setFalseLogin(true);
@@ -45,7 +44,7 @@ export default function Login() {
     } else {
       setFalseLogin(false);
       localStorage.setItem("id", JSON.stringify(loggedUser));
-      dispatch(switchNav("XDDDD"))
+      dispatch(switchNav("XDDDD"));
       history.push("/");
     }
   };
