@@ -14,6 +14,7 @@ namespace reactSIDE.Data
         SiteUser GetSiteUserById(int id);
         void CreateSiteUser(SiteUser ptc);
         SiteUser LoginUser(SiteUser ptc);
+        void UpdateUser(SiteUser ptc);
 
         IEnumerable<Item> getAllItems();
         Item getItemById(int id);

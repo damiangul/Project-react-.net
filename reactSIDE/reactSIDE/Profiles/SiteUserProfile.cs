@@ -10,6 +10,8 @@ namespace gb.Profiles
         {
             CreateMap<SiteUser, SiteUserReadDto>();
             CreateMap<SiteUserCreateDto, SiteUser>();
+            CreateMap<SiteUser, SiteUserUpdateDto>();
+            CreateMap<SiteUserUpdateDto, SiteUser>();
         }
     }
 }

@@ -5,6 +5,7 @@ using reactSIDE.Dtos;
 using reactSIDE.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace reactSIDE.Controllers
 {
@@ -56,6 +57,29 @@ namespace reactSIDE.Controllers
             var siteUserReadDto = _mapper.Map<SiteUserReadDto>(userModel);
 
             return CreatedAtRoute(nameof(GetSiteUserById), new {Id = siteUserReadDto.Id}, siteUserReadDto);
+        }
+
+        //PATCH api/users/5
+        [Authorize]
+        [HttpPatch("{id}")]
+        public ActionResult PartialUpdateItem(int id, JsonPatchDocument<SiteUserUpdateDto> patchDoc)
+        {
+            var itemModelFromRepository = _repository.GetSiteUserById(id);
+            if (itemModelFromRepository == null)
+            {
+                return NotFound();
+            }
+            var itemToPatch = _mapper.Map<SiteUserUpdateDto>(itemModelFromRepository);
+            patchDoc.ApplyTo(itemToPatch, ModelState);
+            if (!TryValidateModel(itemToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+            _mapper.Map(itemToPatch, itemModelFromRepository);
+            _repository.UpdateUser(itemModelFromRepository);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }

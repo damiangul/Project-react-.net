@@ -97,5 +97,10 @@ namespace reactSIDE.Data
         {
             return _context.SiteUsers.FirstOrDefault(p => p.UserLogin == ptc.UserLogin && p.UserPassword==ptc.UserPassword);
         }
+
+        public void UpdateUser(SiteUser ptc)
+        {
+           
+        }
     }
 }
