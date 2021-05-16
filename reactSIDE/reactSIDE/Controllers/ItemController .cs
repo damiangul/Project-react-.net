@@ -5,6 +5,7 @@ using reactSIDE.Dtos;
 using reactSIDE.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Authorization;
 
 namespace reactSIDE.Controllers
 {
@@ -23,6 +24,7 @@ namespace reactSIDE.Controllers
 
 
         //GET api/items
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<ItemReadDto>> getAllItems()
         {
@@ -32,6 +34,7 @@ namespace reactSIDE.Controllers
         }
 
         //GET api/items/5
+        [Authorize]
         [HttpGet("{id}", Name = "getItemById")]
         public ActionResult<ItemReadDto> getItemById(int id)
         {
@@ -44,6 +47,7 @@ namespace reactSIDE.Controllers
         }
 
         //POST api/items
+        [Authorize]
         [HttpPost]
         public ActionResult<ItemReadDto> CreateItem(ItemCreateDto itemCreateDto)
         {
@@ -56,6 +60,7 @@ namespace reactSIDE.Controllers
         }
 
         //PUT api/items/5
+        [Authorize]
         [HttpPut("{id}")]
         public ActionResult UpdateItem(int id,ItemUpdateDto itemUpdateDto)
         {
@@ -72,6 +77,7 @@ namespace reactSIDE.Controllers
         }
 
         //PATCH api/items/5
+        [Authorize]
         [HttpPatch("{id}")]
         public ActionResult PartialUpdateItem(int id,JsonPatchDocument<ItemUpdateDto> patchDoc)
         {
@@ -94,6 +100,7 @@ namespace reactSIDE.Controllers
         }
 
         //DELETE api/items/5
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteItem(int id)
         {

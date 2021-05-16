@@ -4,6 +4,7 @@ using reactSIDE.Data;
 using reactSIDE.Dtos;
 using reactSIDE.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace reactSIDE.Controllers
 {
@@ -22,6 +23,7 @@ namespace reactSIDE.Controllers
 
         //private readonly MockGBRepo _repository = new MockGBRepo();
         //Get api/products
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<ProductReadDto>> GetAllProducts()
         {
@@ -31,6 +33,7 @@ namespace reactSIDE.Controllers
         }
 
         //Get api/products/5
+        [Authorize]
         [HttpGet("{id}", Name="GetProductById")]
         public ActionResult <ProductReadDto> GetProductById(int id)
         {
@@ -43,6 +46,7 @@ namespace reactSIDE.Controllers
         }
 
         //Post api/products
+        [Authorize]
         [HttpPost]
         public ActionResult<ProductReadDto> CreateProduct(ProductCreateDto productCreateDto)
         {

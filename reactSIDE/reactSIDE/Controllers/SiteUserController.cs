@@ -4,6 +4,7 @@ using reactSIDE.Data;
 using reactSIDE.Dtos;
 using reactSIDE.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace reactSIDE.Controllers
 {
@@ -22,6 +23,7 @@ namespace reactSIDE.Controllers
 
 
         //Get api/users
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<SiteUserReadDto>> getAllSiteUser()
         {
@@ -31,6 +33,7 @@ namespace reactSIDE.Controllers
         }
 
         //Get api/users/5
+        [Authorize]
         [HttpGet("{id}", Name= "GetSiteUserById")]
         public ActionResult <SiteUserReadDto> GetSiteUserById(int id)
         {
@@ -43,6 +46,7 @@ namespace reactSIDE.Controllers
         }
 
         //Post api/users
+        [Authorize]
         [HttpPost]
         public ActionResult<SiteUserReadDto> CreateSiteUser(SiteUserCreateDto siteUserCreateDto)
         {

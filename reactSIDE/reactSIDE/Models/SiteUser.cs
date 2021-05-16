@@ -19,6 +19,9 @@ namespace reactSIDE.Models
         public string Nazwisko { get; set; }
       
         public string adresPart1 { get; set; }
-    
+
+        public double Cash { get; set; }
+
+
     }
 }
