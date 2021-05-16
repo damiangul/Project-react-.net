@@ -62,21 +62,21 @@ namespace reactSIDE.Controllers
         //PATCH api/users/5
         [Authorize]
         [HttpPatch("{id}")]
-        public ActionResult PartialUpdateItem(int id, JsonPatchDocument<SiteUserUpdateDto> patchDoc)
+        public ActionResult PartialUpdateSiteUser(int id, JsonPatchDocument<SiteUserUpdateDto> patchDoc)
         {
-            var itemModelFromRepository = _repository.GetSiteUserById(id);
-            if (itemModelFromRepository == null)
+            var siteUserModelFromRepository = _repository.GetSiteUserById(id);
+            if (siteUserModelFromRepository == null)
             {
                 return NotFound();
             }
-            var itemToPatch = _mapper.Map<SiteUserUpdateDto>(itemModelFromRepository);
+            var itemToPatch = _mapper.Map<SiteUserUpdateDto>(siteUserModelFromRepository);
             patchDoc.ApplyTo(itemToPatch, ModelState);
             if (!TryValidateModel(itemToPatch))
             {
                 return ValidationProblem(ModelState);
             }
-            _mapper.Map(itemToPatch, itemModelFromRepository);
-            _repository.UpdateUser(itemModelFromRepository);
+            _mapper.Map(itemToPatch, siteUserModelFromRepository);
+            _repository.UpdateUser(siteUserModelFromRepository);
             _repository.SaveChanges();
 
             return NoContent();

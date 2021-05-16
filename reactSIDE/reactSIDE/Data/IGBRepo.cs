@@ -9,6 +9,7 @@ namespace reactSIDE.Data
         IEnumerable<Product> getAllProducts();
         Product GetProductById(int id);
         void CreateProduct(Product ptc);
+        void UpdateProduct(Product ptc);
 
         IEnumerable<SiteUser> getAllSiteUser();
         SiteUser GetSiteUserById(int id);

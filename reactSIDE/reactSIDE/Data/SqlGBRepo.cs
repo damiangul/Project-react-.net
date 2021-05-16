@@ -102,5 +102,10 @@ namespace reactSIDE.Data
         {
            
         }
+
+        public void UpdateProduct(Product ptc)
+        {
+           
+        }
     }
 }
