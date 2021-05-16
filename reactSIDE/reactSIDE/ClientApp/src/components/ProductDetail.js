@@ -9,6 +9,8 @@ export default function ProductDetail({ match }) {
   const usersCartLoaded = useSelector((store) => store.cart); //Koszyk zalogowanego uczestnika
   const dispatch = useDispatch();
   const history = useHistory();
+  const loggedUser_1 = localStorage.getItem("id");
+  const ifLogged = JSON.parse(loggedUser_1);
 
   const selectedProduct = products.find(
     (product) => Number(match.params.id) === product.id
@@ -20,7 +22,7 @@ export default function ProductDetail({ match }) {
 
     const cdExists = usersCartLoaded.filter((element) => {
       return (
-        element.userID === loggedUser[1] &&
+        element.userID === ifLogged.id &&
         element.type === 0 &&
         element.productID === selectedProduct.id
       );
@@ -32,7 +34,7 @@ export default function ProductDetail({ match }) {
     }
 
     const boughtProduct = {
-      userID: loggedUser[1],
+      userID: ifLogged.id,
       productID: selectedProduct.id,
       alreadyBoughtID,
       quantity,
@@ -63,7 +65,7 @@ export default function ProductDetail({ match }) {
             <h3 className="text-center">Date: {selectedProduct.dataWydania}</h3>
           </div>
           <div className="relative">
-            {loggedUser[0] ? (
+            {ifLogged !== null ? (
               <button
                 onClick={handleAddToCart}
                 className="absolute left-1/2 transform -translate-x-1/2 w-full sm:w-32 mt-6 mx-auto p-1 rounded-2xl bg-yellow-300 hover:bg-yellow-500 cursor-pointer transition focus:outline-none"

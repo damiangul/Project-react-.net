@@ -10,10 +10,10 @@ export default function Cart() {
   const dispatch = useDispatch();
   let totalPrice = 0;
   const [totalPriceState, setTotalPriceState] = useState(0);
-  const loggedUser = useSelector((store) => store.loggedUser);
   const products = useSelector((store) => store.products);
   const usersCartLoaded = useSelector((store) => store.cart); //Koszyk zalogowanego uczestnika
-
+  const loggedUser_1 = localStorage.getItem("id");
+  const ifLogged = JSON.parse(loggedUser_1);
   //Loading current cart for user
   useEffect(() => {
     const fetchData = async () => {
@@ -23,14 +23,14 @@ export default function Cart() {
         })
         .then((data) => {
           const usersCart = data.filter((element) => {
-            return element.userID === loggedUser[1];
+            return element.userID === ifLogged.id;
           });
           dispatch(loadCart(usersCart));
         });
     };
 
     fetchData();
-  }, [dispatch, loggedUser, totalPrice]);
+  }, [dispatch, ifLogged, totalPrice]);
 
   //Selecting cart products and bought products
   const cartProducts = usersCartLoaded.filter((element) => element.type === 0);
