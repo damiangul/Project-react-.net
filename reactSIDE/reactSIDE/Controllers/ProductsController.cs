@@ -24,7 +24,6 @@ namespace reactSIDE.Controllers
 
         //private readonly MockGBRepo _repository = new MockGBRepo();
         //Get api/products
-        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<ProductReadDto>> GetAllProducts()
         {
@@ -34,7 +33,6 @@ namespace reactSIDE.Controllers
         }
 
         //Get api/products/5
-        [Authorize]
         [HttpGet("{id}", Name="GetProductById")]
         public ActionResult <ProductReadDto> GetProductById(int id)
         {
