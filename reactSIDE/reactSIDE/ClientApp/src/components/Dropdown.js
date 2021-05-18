@@ -29,9 +29,14 @@ export default function Dropdown({ isOpen, toggle }) {
         Contact
       </Link>
       {ifLogged === null && (
+        <>
         <Link to={"/login"} className="p-4">
           Login
         </Link>
+        <Link to={"/register"} className="p-4">
+          Register
+        </Link>
+        </>
       )}
       {ifLogged !== null ? (
         <Link to={"/cart"} className="p-4">

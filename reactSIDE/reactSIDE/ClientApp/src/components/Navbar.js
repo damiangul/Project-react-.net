@@ -50,13 +50,23 @@ const Navbar = ({ toggle }) => {
         </Link>
         {switchNAV ? null : null}
         {ifLogged !== null ? null : (
+          <>
           <Link
             className="border border-gray-200 px-4 py-2 hover:bg-yellow-500 transition rounded-2xl"
             to={"/login"}
           >
             Login
-          </Link>
+          </Link>     
+          
+          <Link
+          className="border border-gray-200 px-4 py-2 hover:bg-yellow-500 transition rounded-2xl"
+          to={"/register"}
+        >
+          Register
+        </Link>
+          </>
         )}
+        
         {ifLogged !== null ? (
           <Link to={"/cart"} className="p-4">
             Cart
