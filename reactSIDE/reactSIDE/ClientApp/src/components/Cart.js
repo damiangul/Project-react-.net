@@ -4,16 +4,19 @@ import { loadCart } from "../redux/cartActions";
 import { useHistory } from "react-router-dom";
 import CartElements from "./CartElements";
 import BoughCartElements from "./BoughCartElements";
+import { loadProducts } from "../redux/productsLoadingActions";
 
 export default function Cart() {
   const history = useHistory();
   const dispatch = useDispatch();
   let totalPrice = 0;
   const [totalPriceState, setTotalPriceState] = useState(0);
+  const [deletedCD, setDeletedCD] = useState(false);
   const products = useSelector((store) => store.products);
   const usersCartLoaded = useSelector((store) => store.cart); //Koszyk zalogowanego uczestnika
   const loggedUser_1 = localStorage.getItem("id");
   const ifLogged = JSON.parse(loggedUser_1);
+
   //Loading current cart for user
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +33,7 @@ export default function Cart() {
     };
 
     fetchData();
-  }, [dispatch, ifLogged, totalPrice]);
+  }, [dispatch, totalPrice, deletedCD]);
 
   //Selecting cart products and bought products
   const cartProducts = usersCartLoaded.filter((element) => element.type === 0);
@@ -86,6 +89,8 @@ export default function Cart() {
       <CartElements
         key={cartElement.id}
         product={product}
+        deletedCD={deletedCD}
+        setDeletedCD={setDeletedCD}
         cartElement={cartElement}
         handleAmountChange={handleAmountChange}
       />
@@ -108,6 +113,7 @@ export default function Cart() {
   });
   boughtElements.reverse();
 
+  // console.log(products, cartProducts);
   //Handle buy button
   const handleBuy = () => {
     const requestOptions = {
@@ -123,14 +129,46 @@ export default function Cart() {
     };
 
     cartProducts.forEach((element) => {
+      let CD = products.find((cd) => cd.id === element.productID);
+
+      let patchQuantity = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        body: JSON.stringify([
+          {
+            op: "replace",
+            path: "/quantity",
+            value: (
+              parseInt(CD.quantity) - parseInt(element.quantity)
+            ).toString(),
+          },
+        ]),
+      };
+
+      fetch(
+        `https://localhost:44304/api/products/${CD.id}`,
+        patchQuantity
+      ).then((response) => response.json());
+
       fetch(
         `https://localhost:44304/api/items/${element.id}`,
         requestOptions
       ).then((response) => response.json());
     });
 
+    fetch("https://localhost:44304/api/products")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        dispatch(loadProducts(data));
+      });
+
     history.push("/");
   };
+
+  // console.log(products);
 
   return (
     <div>

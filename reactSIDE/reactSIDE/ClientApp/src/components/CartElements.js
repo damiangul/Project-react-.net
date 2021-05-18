@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 export default function CartElements({
   product,
   cartElement,
+  deletedCD,
+  setDeletedCD,
   handleAmountChange,
 }) {
   const [quantity, setQuantity] = useState(cartElement.quantity);
@@ -30,6 +32,8 @@ export default function CartElements({
       }).then(() => {
         console.log("DELETED");
       });
+
+      setDeletedCD(!deletedCD);
     }
 
     handleAmountChange(cartElement.id, quantity - 1);

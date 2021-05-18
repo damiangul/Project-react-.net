@@ -4,7 +4,13 @@ import { animated, config, useSpring } from "react-spring";
 //Components
 import Footer from "./Footer";
 
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { loadProducts } from "../redux/productsLoadingActions";
+
 export default function Home() {
+  const dispatch = useDispatch();
+
   const h2StyleSpring = useSpring({
     from: {
       opacity: 0,
@@ -26,6 +32,17 @@ export default function Home() {
     delay: 1200,
     config: config.molasses,
   });
+
+  useEffect(() => {
+    fetch("https://localhost:44304/api/products")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        dispatch(loadProducts(data));
+      });
+  }, [dispatch]);
 
   return (
     <>

@@ -13,7 +13,7 @@ import Contact from "./components/Contact";
 import Login from "./components/Login";
 
 //REDUX
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadProducts } from "./redux/productsLoadingActions";
 import ProductDetail from "./components/ProductDetail";
 import Cart from "./components/Cart";
@@ -23,6 +23,7 @@ import Register from "./components/Register";
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
+  const products = useSelector((store) => store.products);
 
   const toggle = () => {
     setIsOpen(!isOpen);
