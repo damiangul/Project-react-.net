@@ -47,7 +47,7 @@ namespace reactSIDE.Controllers
         }
 
         //Post api/users
-        [Authorize]
+      
         [HttpPost]
         public ActionResult<SiteUserReadDto> CreateSiteUser(SiteUserCreateDto siteUserCreateDto)
         {
