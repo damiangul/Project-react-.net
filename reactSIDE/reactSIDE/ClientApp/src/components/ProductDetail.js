@@ -44,6 +44,18 @@ export default function ProductDetail({ match }) {
     history.push("/");
   };
 
+  const buyButton =
+    parseInt(selectedProduct.quantity) === 0 ? (
+      <p className="text-center text-red-600">Empty</p>
+    ) : (
+      <button
+        onClick={handleAddToCart}
+        className="absolute left-1/2 transform -translate-x-1/2 w-full sm:w-32 mt-6 mx-auto p-1 rounded-2xl bg-yellow-300 hover:bg-yellow-500 cursor-pointer transition focus:outline-none"
+      >
+        Buy now
+      </button>
+    );
+
   return (
     <div className="bg-gray-100 h-imageTheWeeknd">
       <div className="md:text-2xl lg:flex lg:flex-col lg:p-2 lg:w-1/2 lg:mx-auto">
@@ -66,12 +78,7 @@ export default function ProductDetail({ match }) {
           </div>
           <div className="relative">
             {ifLogged !== null ? (
-              <button
-                onClick={handleAddToCart}
-                className="absolute left-1/2 transform -translate-x-1/2 w-full sm:w-32 mt-6 mx-auto p-1 rounded-2xl bg-yellow-300 hover:bg-yellow-500 cursor-pointer transition focus:outline-none"
-              >
-                Buy now
-              </button>
+              buyButton
             ) : (
               <p className="text-center text-yellow-500 mt-5">Login to buy</p>
             )}

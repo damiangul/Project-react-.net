@@ -1,15 +1,30 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import {} from "react-redux";
+import { useEffect } from "react";
+import { loadProducts } from "../redux/productsLoadingActions";
 
 export default function Shop() {
+  const dispatch = useDispatch();
   // W tym api jest id, title, author, dataWydania, genre, price, foto i title.
   const products = useSelector((store) => store.products);
 
   //IMPLMENTACJA PRZY WIEKSZEJ ILOSCI PLYT
   const [showFrom, setShowFrom] = useState(0);
   const [showTo, setShowTo] = useState(4);
+
+  useEffect(() => {
+    fetch("https://localhost:44304/api/products")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        dispatch(loadProducts(data));
+      });
+  }, [dispatch]);
 
   const productsOnSite = products.map((product) => (
     <div
