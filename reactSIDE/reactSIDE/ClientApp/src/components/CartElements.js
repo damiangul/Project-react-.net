@@ -8,9 +8,7 @@ export default function CartElements({
   handleAmountChange,
 }) {
   const [quantity, setQuantity] = useState(cartElement.quantity);
-
   const products = useSelector((store) => store.products);
-
   const lookingForQuantity = products.find(
     (product) => product.id === cartElement.productID
   );

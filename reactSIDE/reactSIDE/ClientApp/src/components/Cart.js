@@ -131,6 +131,28 @@ export default function Cart() {
     cartProducts.forEach((element) => {
       let CD = products.find((cd) => cd.id === element.productID);
 
+      let userCash = JSON.parse(loggedUser_1);
+      userCash.cash = userCash.cash - CD.price * element.quantity;
+
+      if (userCash.cash < 0) {
+        alert("No funds!");
+        return 0;
+      }
+
+      localStorage.setItem("id", JSON.stringify(userCash));
+
+      let updateCash = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        body: JSON.stringify([
+          {
+            op: "replace",
+            path: "/cash",
+            value: userCash.cash,
+          },
+        ]),
+      };
+
       let patchQuantity = {
         method: "PATCH",
         headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -144,6 +166,11 @@ export default function Cart() {
           },
         ]),
       };
+
+      fetch(
+        `https://localhost:44304/api/users/${userCash.id}`,
+        updateCash
+      ).then((response) => response.json());
 
       fetch(
         `https://localhost:44304/api/products/${CD.id}`,
@@ -161,26 +188,28 @@ export default function Cart() {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         dispatch(loadProducts(data));
       });
 
     history.push("/");
   };
 
-  // console.log(products);
-
   return (
     <div>
       <div className="w-2/3 mx-auto lg:w-4/5 2xl:w-1/2 border shadow-lg p-7 mt-4">
         <h2 className="text-center mb-4 uppercase font-bold">Cart</h2>
         {cartElements}
-        <button
-          onClick={handleBuy}
-          className="p-2 rounded-2xl bg-yellow-300 hover:bg-yellow-500 cursor-pointer transition focus:outline-none"
-        >
-          Buy now for {totalPrice}
-        </button>
+        <div className="flex flex-row justify-between">
+          <button
+            onClick={handleBuy}
+            className="p-2 rounded-2xl bg-yellow-300 hover:bg-yellow-500 cursor-pointer transition focus:outline-none"
+          >
+            Buy now for {totalPrice}
+          </button>
+          <p className="font-mono">
+            Current account balance: <strong>{ifLogged.cash} zł</strong>
+          </p>
+        </div>
       </div>
       <div className="w-2/3 mx-auto lg:w-4/5 2xl:w-1/2 border shadow-lg p-7 mt-4">
         <h2 className="text-center mb-4 uppercase font-bold">Bought</h2>
