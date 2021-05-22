@@ -4,6 +4,8 @@ using reactSIDE.Data;
 using reactSIDE.Dtos;
 using reactSIDE.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace reactSIDE.Controllers
 {
@@ -22,6 +24,7 @@ namespace reactSIDE.Controllers
 
 
         //Get api/users
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<SiteUserReadDto>> getAllSiteUser()
         {
@@ -31,6 +34,7 @@ namespace reactSIDE.Controllers
         }
 
         //Get api/users/5
+        [Authorize]
         [HttpGet("{id}", Name= "GetSiteUserById")]
         public ActionResult <SiteUserReadDto> GetSiteUserById(int id)
         {
@@ -43,6 +47,7 @@ namespace reactSIDE.Controllers
         }
 
         //Post api/users
+      
         [HttpPost]
         public ActionResult<SiteUserReadDto> CreateSiteUser(SiteUserCreateDto siteUserCreateDto)
         {
@@ -52,6 +57,29 @@ namespace reactSIDE.Controllers
             var siteUserReadDto = _mapper.Map<SiteUserReadDto>(userModel);
 
             return CreatedAtRoute(nameof(GetSiteUserById), new {Id = siteUserReadDto.Id}, siteUserReadDto);
+        }
+
+        //PATCH api/users/5
+        [Authorize]
+        [HttpPatch("{id}")]
+        public ActionResult PartialUpdateSiteUser(int id, JsonPatchDocument<SiteUserUpdateDto> patchDoc)
+        {
+            var siteUserModelFromRepository = _repository.GetSiteUserById(id);
+            if (siteUserModelFromRepository == null)
+            {
+                return NotFound();
+            }
+            var itemToPatch = _mapper.Map<SiteUserUpdateDto>(siteUserModelFromRepository);
+            patchDoc.ApplyTo(itemToPatch, ModelState);
+            if (!TryValidateModel(itemToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+            _mapper.Map(itemToPatch, siteUserModelFromRepository);
+            _repository.UpdateUser(siteUserModelFromRepository);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }

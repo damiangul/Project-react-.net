@@ -6,10 +6,24 @@ import Shop from "./components/Shop";
 import Dropdown from "./components/Dropdown";
 
 import "./custom.css";
+
+//COMPONENTS
 import AboutUs from "./components/AboutUs";
+import Contact from "./components/Contact";
+import Login from "./components/Login";
+
+//REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { loadProducts } from "./redux/productsLoadingActions";
+import ProductDetail from "./components/ProductDetail";
+import Cart from "./components/Cart";
+import NewCd from "./components/NewCd";
+import Register from "./components/Register";
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const products = useSelector((store) => store.products);
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -29,6 +43,17 @@ export default function App() {
     };
   });
 
+  useEffect(() => {
+      fetch("https://reactside20210516201046.azurewebsites.net/api/products")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        dispatch(loadProducts(data));
+      });
+  }, [dispatch]);
+
   return (
     <Router>
       <Navbar toggle={toggle} />
@@ -36,7 +61,16 @@ export default function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/shop" component={Shop} />
+        <Route
+          path="/product/:id"
+          render={(props) => <ProductDetail {...props} />}
+        />
+        <Route path="/contact" component={Contact} />
         <Route path="/aboutus" component={AboutUs} />
+        <Route path="/login" component={Login} />
+        <Route path="/cart" component={Cart} />
+        <Route path="/addNewCd" component={NewCd} />
+        <Route path="/register" component={Register} />
       </Switch>
     </Router>
   );

@@ -1,15 +1,64 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { animated, config, useSpring } from "react-spring";
+//Components
 import Footer from "./Footer";
 
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { loadProducts } from "../redux/productsLoadingActions";
+
 export default function Home() {
+  const dispatch = useDispatch();
+
+  const h2StyleSpring = useSpring({
+    from: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
+    },
+    delay: 600,
+    config: config.molasses,
+  });
+
+  const h4Style = useSpring({
+    from: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
+    },
+    delay: 1200,
+    config: config.molasses,
+  });
+
+  useEffect(() => {
+      fetch("https://reactside20210516201046.azurewebsites.net/api/products")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        dispatch(loadProducts(data));
+      });
+  }, [dispatch]);
+
   return (
     <>
       <div className="flex flex-col justify-center items-center bg-gray-100">
         <div className="h-imageTheWeeknd relative">
-          <h2 className="absolute top-4 left-1/2 transform -translate-x-1/2 text-white font-mono text-6xl text-center">
+          <animated.h2
+            style={h2StyleSpring}
+            className="absolute top-4 left-1/2 transform -translate-x-1/2 text-white font-mono text-5xl text-center"
+          >
             Order now
-          </h2>
+          </animated.h2>
+          <animated.h4
+            style={h4Style}
+            className="absolute top-28 left-1/2 transform -translate-x-1/2 text-white font-mono text-center"
+          >
+            The weeknd newest album!
+          </animated.h4>
           <img
             className="object-cover h-full w-full"
             src="images/theweeknd.jpg"
@@ -18,7 +67,7 @@ export default function Home() {
         </div>
         <Link
           to={"/shop"}
-          className="m-12 py-6 px-10 bg-yellow-500 rounded-full text-3xl hover: bg-yellow-300 transition duration-300 ease-in-out flex items-center animate-bounce"
+          className="m-12 py-6 px-10 bg-yellow-300 hover:bg-yellow-500 rounded-full text-3xl transition duration-300 ease-in-out flex items-center animate-bounce"
         >
           Buy now!
           <svg

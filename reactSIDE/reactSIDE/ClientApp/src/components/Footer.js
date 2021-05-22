@@ -5,12 +5,11 @@ import {
   faFacebook,
   faInstagram,
   faGithub,
-  faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
   return (
-    <footer className="flex border-t p-3">
+    <footer className="flex border-t p-3 bg-white">
       <div className="w-3/4">
         <div className="pl-8 font-mono font-bold text-2xl">GBshop</div>
         <div>

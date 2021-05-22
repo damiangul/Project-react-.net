@@ -11,7 +11,17 @@ namespace reactSIDE.Models
         public string UserPassword { get;set;}
         [Required]
         public string UserLogin { get;set;}
-        [Required]
+        
         public string UserRole { get;set;}
+       
+        public string Imie { get; set; }
+      
+        public string Nazwisko { get; set; }
+      
+        public string adresPart1 { get; set; }
+
+        public double Cash { get; set; }
+
+
     }
 }

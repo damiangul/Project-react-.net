@@ -4,6 +4,8 @@ using reactSIDE.Data;
 using reactSIDE.Dtos;
 using reactSIDE.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace reactSIDE.Controllers
 {
@@ -43,6 +45,7 @@ namespace reactSIDE.Controllers
         }
 
         //Post api/products
+        [Authorize]
         [HttpPost]
         public ActionResult<ProductReadDto> CreateProduct(ProductCreateDto productCreateDto)
         {
@@ -53,6 +56,29 @@ namespace reactSIDE.Controllers
 
             return CreatedAtRoute(nameof(GetProductById), new {Id = productReadDto.Id}, productReadDto);
             //return Ok(productReadDto);
+        }
+
+        //PATCH api/product/5
+        [Authorize]
+        [HttpPatch("{id}")]
+        public ActionResult PartialUpdateProduct(int id, JsonPatchDocument<ProductUpdateDto> patchDoc)
+        {
+            var productModelFromRepository = _repository.GetProductById(id);
+            if (productModelFromRepository == null)
+            {
+                return NotFound();
+            }
+            var itemToPatch = _mapper.Map<ProductUpdateDto>(productModelFromRepository);
+            patchDoc.ApplyTo(itemToPatch, ModelState);
+            if (!TryValidateModel(itemToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+            _mapper.Map(itemToPatch, productModelFromRepository);
+            _repository.UpdateProduct(productModelFromRepository);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }
