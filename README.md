@@ -6,3 +6,6 @@ GBshop is a fullstack website to buy some of the most recent albums all around t
 - redux, 
 - .NET CORE, 
 - MSSQL.
+
+LINK:
+https://reactside20210516201046.azurewebsites.net
