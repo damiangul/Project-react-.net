@@ -8,4 +8,4 @@ GBshop is a fullstack website to buy some of the most recent albums all around t
 - MSSQL.
 
 LINK:
-https://reactside20210516201046.azurewebsites.net/cart
+https://reactside20210516201046.azurewebsites.net
