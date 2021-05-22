@@ -64,7 +64,7 @@ export default function NewCd() {
         }),
       };
       fetch(
-        "https://localhost:44304/api/products/",
+        "https://reactside20210516201046.azurewebsites.net/api/products/",
         requestOptions
       ).then((response) => response.json());
     }

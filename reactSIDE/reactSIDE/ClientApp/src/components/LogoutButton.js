@@ -9,7 +9,7 @@ export default function LogoutButton() {
 
   const logoutUser = async () => {
 
-    await fetch("https://localhost:44304/api/login/");
+      await fetch("https://reactside20210516201046.azurewebsites.net/api/login/");
     localStorage.removeItem("id");
     dispatch(switchNav("XDDD"))
     history.push("/");

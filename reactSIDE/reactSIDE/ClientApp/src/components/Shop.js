@@ -16,7 +16,7 @@ export default function Shop() {
   const [showTo, setShowTo] = useState(4);
 
   useEffect(() => {
-    fetch("https://localhost:44304/api/products")
+      fetch("https://reactside20210516201046.azurewebsites.net/api/products")
       .then((res) => {
         return res.json();
       })

@@ -45,11 +45,11 @@ export default function Register() {
           Imie: name,
           Nazwisko: surname,
           adresPart1: adres,
-          cash: 0
+          cash: 100
         }),
       };
       fetch(
-        "https://localhost:44304/api/users/",
+        "https://reactside20210516201046.azurewebsites.net/api/users/",
         requestOptions
       ).then((response) => response.json());
     }

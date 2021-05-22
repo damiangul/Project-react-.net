@@ -27,7 +27,7 @@ export const cartReducer = (state = [], action) => {
           }),
         };
         fetch(
-          `https://localhost:44304/api/items/${alreadyBoughtID}`,
+          `https://reactside20210516201046.azurewebsites.net/api/items/${alreadyBoughtID}`,
           requestOptions
         ).then((response) => response.json());
       } else {
@@ -43,7 +43,7 @@ export const cartReducer = (state = [], action) => {
           }),
         };
         fetch(
-          "https://localhost:44304/api/items/",
+          "https://reactside20210516201046.azurewebsites.net/api/items/",
           requestOptions
         ).then((response) => response.json());
       }

@@ -44,7 +44,7 @@ export default function App() {
   });
 
   useEffect(() => {
-    fetch("https://localhost:44304/api/products")
+      fetch("https://reactside20210516201046.azurewebsites.net/api/products")
       .then((res) => {
         return res.json();
       })

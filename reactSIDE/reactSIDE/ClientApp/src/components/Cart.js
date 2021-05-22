@@ -20,7 +20,7 @@ export default function Cart() {
   //Loading current cart for user
   useEffect(() => {
     const fetchData = async () => {
-      await fetch("https://localhost:44304/api/items/")
+        await fetch("https://reactside20210516201046.azurewebsites.net/api/items/")
         .then((res) => {
           return res.json();
         })
@@ -66,7 +66,7 @@ export default function Cart() {
         };
 
         fetch(
-          `https://localhost:44304/api/items/${element.id}`,
+          `https://reactside20210516201046.azurewebsites.net/api/items/${element.id}`,
           requestOptions
         ).then((response) => response.json());
       }
@@ -127,11 +127,11 @@ export default function Cart() {
         },
       ]),
     };
-
+    let userCash = JSON.parse(loggedUser_1);
     cartProducts.forEach((element) => {
       let CD = products.find((cd) => cd.id === element.productID);
 
-      let userCash = JSON.parse(loggedUser_1);
+      
       userCash.cash = userCash.cash - CD.price * element.quantity;
 
       if (userCash.cash < 0) {
@@ -168,22 +168,25 @@ export default function Cart() {
       };
 
       fetch(
-        `https://localhost:44304/api/users/${userCash.id}`,
+        `https://reactside20210516201046.azurewebsites.net/api/users/${userCash.id}`,
         updateCash
-      ).then((response) => response.json());
+      ).then((response) => response.json())
+      .then((res) =>{
+        console.log("FETCH"+userCash.cash);
+      });
 
       fetch(
-        `https://localhost:44304/api/products/${CD.id}`,
+        `https://reactside20210516201046.azurewebsites.net/api/products/${CD.id}`,
         patchQuantity
       ).then((response) => response.json());
 
       fetch(
-        `https://localhost:44304/api/items/${element.id}`,
+        `https://reactside20210516201046.azurewebsites.net/api/items/${element.id}`,
         requestOptions
       ).then((response) => response.json());
     });
 
-    fetch("https://localhost:44304/api/products")
+      fetch("https://reactside20210516201046.azurewebsites.net/api/products")
       .then((res) => {
         return res.json();
       })

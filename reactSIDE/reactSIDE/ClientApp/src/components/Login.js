@@ -30,7 +30,7 @@ export default function Login() {
         userLogin: login,
       }),
     };
-    await fetch("https://localhost:44304/api/login/", requestOptions)
+      await fetch("https://reactside20210516201046.azurewebsites.net/api/login/", requestOptions)
       .then((response) => response.json())
       .then((res) => {
         loggedUser = res;

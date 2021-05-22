@@ -25,7 +25,7 @@ export default function CartElements({
     setQuantity(quantity - 1);
 
     if (quantity - 1 === 0) {
-      await fetch(`https://localhost:44304/api/items/${cartElement.id}`, {
+        await fetch(`https://reactside20210516201046.azurewebsites.net/api/items/${cartElement.id}`, {
         method: "DELETE",
       }).then(() => {
         console.log("DELETED");
